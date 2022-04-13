@@ -1,6 +1,3 @@
-from locale import currency
-from statistics import mode
-import black
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
