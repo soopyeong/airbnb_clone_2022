@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Profile
+{% endblock page_title %}
+
+
+{% block content %}
+
+    {% if user_obj.avatar %}
+        <img src="{{user_obj.avatar.url}}" />
+    {% else %}
+        <div>
+            <span>{{user_obj.first_name|first}}</span>
+        </div>
+    {% endif %}
+
+    <div>
+        {{user_obj.email}}
+        {{user_obj.bio}}
+
+        {% if user == user_obj %}
+            <a href="{% url 'users:update' %}">Edit Profile</a>
+        {% endif %}
+    </div>
+
+    <div>
+        <h3>{{user_obj.first_name}}'s Rooms</h3>
+        <div>
+            {% for room in user_obj.rooms.all %}
+                <h3>
+                    <a href="{% url 'rooms:detail' room.pk %}">{{room.name}}</a>
+                </h3>
+            {% endfor %} 
+        </div>
+    </div>
+    
+{% endblock content %}
