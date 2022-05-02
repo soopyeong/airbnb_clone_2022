@@ -11,10 +11,6 @@
 
     {% include "partials/social_login.html" %}
 
-    <form method="post" action="{% url 'users:signup' %}">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>Sign Up</button>
-    </form>
+    {% include "mixins/auth/auth_form.html" with form=form cta="Sign up" %}
     
 {% endblock content %}
