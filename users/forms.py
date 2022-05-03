@@ -37,8 +37,15 @@ class SignUpForm(forms.ModelForm):
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"}),
-        label="Confirm Password",
     )
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        try:
+            models.User.objects.get(email=email)
+            raise forms.ValidationError("That email is already taken")
+        except models.User.DoesNotExist:
+            return email
 
     def clean_password1(self):
         password = self.cleaned_data.get("password")

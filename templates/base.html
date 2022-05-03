@@ -5,19 +5,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>{% block page_title %}{% endblock page_title %} | soopyeong</title>
   </head>
-  <body>
-    <header>
+
+  <body class="text-gray-800 mt-24 font-light">
+    <header class="container max-w-full flex items-center justify-between px-6 h-20 border-b border-gray-400 fixed bg-white inset-0">
+      <div class="flex items-center w-2/5">
+        <a class="mr-6" href="{% url 'core:home' %}">
+          <img class="w-8" src="{% static 'img/logo.png' %}" />
+        </a>
+
+        {% block search_bar %}
+          <form method="get" action="{% url 'rooms:search' %}" class="w-full">
+            <input class="search-box border px-5 py-3 font-medium placeholder-gray-600 rounded-sm w-full shadow-md hover:shadow-lg focus:outline-none" name="city" placeholder="Search by City" />
+          </form>
+        {% endblock search_bar %}
+      </div>
       {% include "partials/nav.html" %}
-
-      {% block search_bar %}
-        <form method="get" action="{% url 'rooms:search' %}">
-          <input name="city" placeholder="Search by City" />
-        </form>
-      {% endblock search_bar %}
-
     </header>
 
     {% block content %}{% endblock content %}
